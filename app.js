@@ -10,17 +10,9 @@ var session = require("express-session");
 
 var app = express();
 
-<<<<<<< HEAD
 // connect to mongoose
 mongoose
   .connect("mongodb+srv://bhumit:root@cluster0.9kqc9.mongodb.net/the18?retryWrites=true&w=majority")
-=======
-
-
-//connect to mongoose
-mongoose
-  .connect("mongodb://localhost/the18db")
->>>>>>> 7909701a0e2d398b39d1f405860313008ca37b7e
   .then(() => {
     console.log("mongodb connected...");
   })
@@ -110,18 +102,36 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
+
+var connection = mongoose.connection;
 // Login page Route
-app.get("/teams", (req, res) => {
-  teams.find(function (err, data) {
+app.get("/teams", async (req, res) => {
+  // teams.find(function (err, data) {
+  // });
+  // teams.find(function (err, data) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log("This is Data!" + data);
+  //     res.render("teams", {
+  //       data:data
+  //     });
+  //   }
+  // });
+
+  let data2;
+  await teams.find({}, function (err, data) { // <== note the await keyword here
     if (err) {
       console.log(err);
     } else {
-      console.log("This is Data!" + data);
-      res.render("teams", {
-        data:data
-      });
+      console.log(data);
+      data2 = data;
     }
+  })
+  res.render("teams", {
+    data: data2
   });
+
 });
 
 // // Result Page Route
@@ -356,7 +366,7 @@ app.get("/teams", (req, res) => {
 // });
 
 // Server Start
-app.listen(process.env.PORT || 3000, function(){
+app.listen(process.env.PORT || 3000, function () {
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 
 });
