@@ -11,13 +11,13 @@ var app = express();
 
 
 
-// connect to mongoose
-// mongoose
-//   .connect("mongodb://localhost/the18db")
-//   .then(() => {
-//     console.log("mongodb connected...");
-//   })
-//   .catch(err => console.log(err));
+//connect to mongoose
+mongoose
+  .connect("mongodb://localhost/the18db")
+  .then(() => {
+    console.log("mongodb connected...");
+  })
+  .catch(err => console.log(err));
 
 // Load User Model
 // require("./models/User");
