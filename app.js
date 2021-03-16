@@ -10,17 +10,10 @@ var session = require("express-session");
 
 var app = express();
 
-<<<<<<< HEAD
 // connect to mongoose
 mongoose
   .connect("mongodb+srv://bhumit:root@cluster0.9kqc9.mongodb.net/the18?retryWrites=true&w=majority")
-=======
-
-
 //connect to mongoose
-mongoose
-  .connect("mongodb://localhost/the18db")
->>>>>>> 7909701a0e2d398b39d1f405860313008ca37b7e
   .then(() => {
     console.log("mongodb connected...");
   })
