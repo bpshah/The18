@@ -1,38 +1,20 @@
-<div class="card-deck">
+
+    {{!-- {{#each data}}
+    <li>{{this.sr}}</li>
+  {{/each}} --}}
+  {{!-- {{setVar "greeting" "Hello World!"}}
+
+    {{setVar "branding" "Value 2"}} --}}
+  {{#each data}}
+  
     <div class="card border-dark mb-3" style="max-width: 18rem;">
-        <div class="card-header">Header</div>
-        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-header">{{this.name}}</div>
+        <img class="card-img-top" src="{{this.logo}}" alt="Card image cap">
         <div class="card-body text-dark">
-            <h5 class="card-title">Dark card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
+            <h5 class="card-title">{{this.league}}</h5>
+            <p class="card-text">{{this.country}}</p>
+            <p class="card-text">{{this.founded}}</p>
+            <p class="card-text">{{greeting}}</p>
         </div>
     </div>
-    <div class="card border-dark mb-3" style="max-width: 18rem;">
-        <div class="card-header">Header</div>
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body text-dark">
-            <h5 class="card-title">Dark card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-        </div>
-    </div>
-    <div class="card border-dark mb-3" style="max-width: 18rem;">
-        <div class="card-header">Header</div>
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body text-dark">
-            <h5 class="card-title">Dark card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-        </div>
-    </div>
-    <div class="card border-dark mb-3" style="max-width: 18rem;">
-        <div class="card-header">Header</div>
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body text-dark">
-            <h5 class="card-title">Dark card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-        </div>
-    </div>
-</div>
+{{/each}}

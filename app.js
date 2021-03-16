@@ -1,5 +1,6 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
+var handlebars = require('handlebars');
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var bcrypt = require("bcryptjs");
@@ -9,25 +10,23 @@ var session = require("express-session");
 
 var app = express();
 
-
-
 // connect to mongoose
-// mongoose
-//   .connect("mongodb://localhost/the18db")
-//   .then(() => {
-//     console.log("mongodb connected...");
-//   })
-//   .catch(err => console.log(err));
+mongoose
+  .connect("mongodb+srv://bhumit:root@cluster0.9kqc9.mongodb.net/the18?retryWrites=true&w=majority")
+  .then(() => {
+    console.log("mongodb connected...");
+  })
+  .catch(err => console.log(err));
 
 // Load User Model
-// require("./models/User");
-// const User = mongoose.model("users");
+require("./models/User");
+const User = mongoose.model("users");
 
-// require("./config/passport")(passport);
+require("./config/passport")(passport);
 
 // Load Material Model
-// require("./models/teams");
-// const teams = mongoose.model("teams");
+require("./models/teams");
+const teams = mongoose.model("teams");
 
 // Static files to Express
 app.use(express.static("public"));
@@ -39,7 +38,13 @@ app.engine(
     defaultLayout: "main"
   })
 );
+
 app.set("view engine", "handlebars");
+
+// // handlebar helper for assignment of data
+// handlebars.registerHelper("setVar", function(varName, varValue, options) {
+//   options.data.root[varName] = varValue;
+// });
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -98,16 +103,18 @@ app.get("/about", (req, res) => {
 });
 
 // Login page Route
-// app.get("/teams", (req, res) => {
-//   teams.find(function (err, data) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log(data);
-//     }
-//   });
-//   res.render("teams");
-// });
+app.get("/teams", (req, res) => {
+  teams.find(function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("This is Data!" + data);
+      res.render("teams", {
+        data:data
+      });
+    }
+  });
+});
 
 // // Result Page Route
 // app.get("/result", (req, res) => {
