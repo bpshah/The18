@@ -9,6 +9,8 @@ var session = require("express-session");
 
 var app = express();
 
+
+
 // connect to mongoose
 // mongoose
 //   .connect("mongodb://localhost/the18db")
@@ -339,8 +341,7 @@ app.get("/about", (req, res) => {
 // });
 
 // Server Start
-const port = 8088;
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 
-app.listen(port, () => {
-  console.log("Application has started!");
 });
