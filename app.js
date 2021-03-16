@@ -41,10 +41,10 @@ app.engine(
 
 app.set("view engine", "handlebars");
 
-// // handlebar helper for assignment of data
-// handlebars.registerHelper("setVar", function(varName, varValue, options) {
-//   options.data.root[varName] = varValue;
-// });
+// handlebar helper for assignment of data
+handlebars.registerHelper("setVar", function(varName, varValue, options) {
+  options.data.root[varName] = varValue;
+});
 
 // Body parser middleware
 app.use(bodyParser.json());
