@@ -129,7 +129,7 @@ app.get("/teams", async (req, res) => {
     }
   })
   res.render("teams", {
-    data: data2
+    "data": data2
   });
 
 });
