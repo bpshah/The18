@@ -183,17 +183,17 @@ app.post("/teams", async (req, res) => {
 });
 
 // Post teams
-app.get("/teams/:uid", async (req, res) => {
+app.get("/teams/:uid&:uc", async (req, res) => {
   console.log(req.params.uid);
   let data2;
-  await teams.find({ league : req.params.uid}, function (err, data) { // <== note the await keyword here
+  await teams.find({ league : req.params.uid, country: req.params.uc}, function (err, data) { // <== note the await keyword here
     if (err) {
       console.log(err);
     } else {
       console.log(data + "This");
       data2 = data;
     }
-  });
+  }).limit(10);
   res.render("teams", {
     data : data2
   });
