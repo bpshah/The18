@@ -32,6 +32,9 @@ const teams = mongoose.model("teams");
 require("./models/leagues");
 const leagues = mongoose.model("leagues");
 
+require("./models/players");
+const players = mongoose.model("players");
+
 // Static files to Express
 app.use(express.static("public"));
 
@@ -183,10 +186,27 @@ app.post("/teams", async (req, res) => {
 });
 
 // Post teams
-app.get("/teams/:uid&:country", async (req, res) => {
+app.get("/teams/:uid&:uc", async (req, res) => {
   console.log(req.params.uid);
   let data2;
-  await teams.find({ league : req.params.uid,country : req.params.country}, function (err, data) { // <== note the await keyword here
+  await teams.find({ league : req.params.uid, country: req.params.uc}, function (err, data) { // <== note the await keyword here
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data + "This");
+      data2 = data;
+    }
+  }).limit(10);
+  res.render("teams", {
+    data : data2
+  });
+
+});
+
+app.get("/teams/teams/:name", async (req, res) => {
+  console.log(req.params.name);
+  let data2;
+  await players.find({ team : req.params.name}, function (err, data) { // <== note the await keyword here
     if (err) {
       console.log(err);
     } else {
@@ -194,12 +214,11 @@ app.get("/teams/:uid&:country", async (req, res) => {
       data2 = data;
     }
   });
-  res.render("teams", {
+  res.render("players", {
     data : data2
   });
 
 });
-
 
 app.get("/players", async (req, res) => {
   //console.log(data + "This");
