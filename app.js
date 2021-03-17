@@ -102,6 +102,10 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
+app.get("/data/:uid", (req, res) => {
+  console.log(req.params.uid);
+});
+
 
 var connection = mongoose.connection;
 // Login page Route
