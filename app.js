@@ -12,7 +12,7 @@ var app = express();
 
 // connect to mongoose
 mongoose
-  .connect("mongodb+srv://bhumit:root@cluster0.9kqc9.mongodb.net/the18?retryWrites=true&w=majority")
+  .connect(process.env.MONGODB_URI || "mongodb+srv://bhumit:root@cluster0.9kqc9.mongodb.net/the18?retryWrites=true&w=majority")
   .then(() => {
     console.log("mongodb connected...");
   })
@@ -31,6 +31,9 @@ const teams = mongoose.model("teams");
 // Load leagues Model
 require("./models/leagues");
 const leagues = mongoose.model("leagues");
+
+require("./models/players");
+const players = mongoose.model("players");
 
 // Static files to Express
 app.use(express.static("public"));
@@ -191,6 +194,22 @@ app.get("/teams/:uid&:uc", async (req, res) => {
 
 });
 
+app.get("/teams/teams/:name", async (req, res) => {
+  console.log(req.params.name);
+  let data2;
+  await players.find({ team : req.params.name}, function (err, data) { // <== note the await keyword here
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data + "This");
+      data2 = data;
+    }
+  });
+  res.render("players", {
+    data : data2
+  });
+
+});
 
 app.get("/players", async (req, res) => {
   //console.log(data + "This");
