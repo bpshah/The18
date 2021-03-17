@@ -186,7 +186,7 @@ app.post("/teams", async (req, res) => {
 app.get("/teams/:uid", async (req, res) => {
   console.log(req.params.uid);
   let data2;
-  await teams.find({ league : "Santosh Trophy"}, function (err, data) { // <== note the await keyword here
+  await teams.find({ league : req.params.uid}, function (err, data) { // <== note the await keyword here
     if (err) {
       console.log(err);
     } else {
