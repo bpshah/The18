@@ -23,9 +23,11 @@
 <ul class="list-group">
     {{#each data}}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <img class="image-logo" src="{{this.logo}}" alt="Card image cap">
+        <img class="image-logo" src='{{this.logo}}' alt="Card image cap">
         <strong>{{this.name}}</strong>
-        <a class="btn btn-outline-dark"><strong> > </strong></a>
+        <strong>{{this.country}}</strong>
+        <a class="btn btn-outline-dark" href="./teams/{{this.name}}"><strong> > </strong></a>
     </li>
     {{/each}}
 </ul>
+

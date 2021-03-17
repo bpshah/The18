@@ -28,6 +28,10 @@ require("./config/passport")(passport);
 require("./models/teams");
 const teams = mongoose.model("teams");
 
+// Load leagues Model
+require("./models/leagues");
+const leagues = mongoose.model("leagues");
+
 // Static files to Express
 app.use(express.static("public"));
 
@@ -114,7 +118,7 @@ var connection = mongoose.connection;
 // })
 
 // Login page Route
-app.post("/teams", async (req, res) => {
+// app.post("/teams", async (req, res) => {
   // teams.find(function (err, data) {
   // });
   // teams.find(function (err, data) {
@@ -128,17 +132,88 @@ app.post("/teams", async (req, res) => {
   //   }
   // });
 
+//   let data2;
+//   await teams.find({$text: {$search: req.body.sea}}, function (err, data) { // <== note the await keyword here
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(data);
+//       data2 = data;
+//     }
+//   })
+//   res.render("teams", {
+//     "data": data2
+//   });
+
+// });
+
+
+app.get("/leagues", async (req, res) => {
+  //console.log(data + "This");
   let data2;
-  await teams.find({$text: {$search: req.body.sea}}, function (err, data) { // <== note the await keyword here
+  await leagues.find({}, function (err, data) { // <== note the await keyword here
     if (err) {
       console.log(err);
     } else {
-      console.log(data);
+      console.log(data + "This");
       data2 = data;
     }
-  })
+  }).limit(100);
+  res.render("league", {
+    data : data2
+  });
+
+});
+
+app.post("/teams", async (req, res) => {
+  //console.log(data + "This");
+  let data2;
+  await leagues.find({}, function (err, data) { // <== note the await keyword here
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data + "This");
+      data2 = data;
+    }
+  }).limit(10);
+  res.render("league", {
+    data : data2
+  });
+
+});
+
+// Post teams
+app.get("/teams/:uid", async (req, res) => {
+  console.log(req.params.uid);
+  let data2;
+  await teams.find({ league : "Santosh Trophy"}, function (err, data) { // <== note the await keyword here
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data + "This");
+      data2 = data;
+    }
+  });
   res.render("teams", {
-    "data": data2
+    data : data2
+  });
+
+});
+
+
+app.get("/players", async (req, res) => {
+  //console.log(data + "This");
+  let data2;
+  await leagues.find({}, function (err, data) { // <== note the await keyword here
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data + "This");
+      data2 = data;
+    }
+  }).limit(10);
+  res.render("league", {
+    data : data2
   });
 
 });
