@@ -12,7 +12,7 @@ var app = express();
 
 // connect to mongoose
 mongoose
-  .connect("mongodb+srv://bhumit:root@cluster0.9kqc9.mongodb.net/the18?retryWrites=true&w=majority")
+  .connect(process.env.MONGODB_URI || "mongodb+srv://bhumit:root@cluster0.9kqc9.mongodb.net/the18?retryWrites=true&w=majority")
   .then(() => {
     console.log("mongodb connected...");
   })
