@@ -108,8 +108,13 @@ app.get("/data/:uid", (req, res) => {
 
 
 var connection = mongoose.connection;
+// let s;
+// app.post("/t",(req,res) => {
+//   s = req.body.sea;
+// })
+
 // Login page Route
-app.get("/teams", async (req, res) => {
+app.post("/teams", async (req, res) => {
   // teams.find(function (err, data) {
   // });
   // teams.find(function (err, data) {
@@ -124,7 +129,7 @@ app.get("/teams", async (req, res) => {
   // });
 
   let data2;
-  await teams.find({}, function (err, data) { // <== note the await keyword here
+  await teams.find({$text: {$search: req.body.sea}}, function (err, data) { // <== note the await keyword here
     if (err) {
       console.log(err);
     } else {
@@ -137,6 +142,7 @@ app.get("/teams", async (req, res) => {
   });
 
 });
+
 
 // // Result Page Route
 // app.get("/result", (req, res) => {

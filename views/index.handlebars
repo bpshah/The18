@@ -2,13 +2,42 @@
     <div class="row search-root">
         <div class="card search">
             <div class="card-body search-two">
-                <form class="form-inline">
+                <form class="form-inline" method="post" action="/teams">
                     <div>
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <div class="dsearch">
+                            <input class="form-control mr-sm-2 dsearch-input" type="search" placeholder="Search"
+                                aria-label="Search" name="sea">
+
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Options
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#" id="player" onclick="myFunction1()">Player</a>
+                                    <a class="dropdown-item" href="#" id="team" onclick="myFunction2()">Team</a>
+                                    <a class="dropdown-item" href="#" id="leagues" onclick="myFunction3()">Leagues</a>
+                                </div>
+                            </div>
+                            <div class="clear-float"></div>
+                            <button class="btn btn-outline-success my-2 my-sm-0 search-button"
+                                type="submit">Search</button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function myFunction1() {
+        document.getElementById("dropdownMenuButton").innerHTML = document.getElementById("player").innerHTML;
+    }
+    function myFunction2() {
+        document.getElementById("dropdownMenuButton").innerHTML = document.getElementById("team").innerHTML;
+    }
+    function myFunction3() {
+        document.getElementById("dropdownMenuButton").innerHTML = document.getElementById("leagues").innerHTML;
+    }
+</script>

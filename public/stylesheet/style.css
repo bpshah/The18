@@ -89,3 +89,16 @@ body {
 .card-team{
     padding: 10px;
 }
+
+.dsearch-input, .dropdown{
+    float: left;
+}
+
+.clear-float{
+    clear: both;
+}
+
+.search-button{
+    /* margin-top: 19px;  */
+    margin-left: 80px;
+}
