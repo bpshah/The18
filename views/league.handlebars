@@ -19,15 +19,23 @@
     </div>
     {{/each}}
 </div> --}}
-
 <ul class="list-group">
     {{#each data}}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <img class="image-logo" src='{{this.logo}}' alt="Card image cap">
-        <strong>{{this.name}}</strong>
-        <strong>{{this.country}}</strong>
-        <a class="btn btn-outline-dark" href="./teams/{{this.name}}&{{this.country}}"><strong> > </strong></a>
+        <div class="row list-div">
+            <div class="col-sm">
+                <img class="image-logo" src='{{this.logo}}' alt="Card image cap">
+            </div>
+            <div class="col-sm">
+                <strong>{{this.name}}</strong>
+            </div>
+            <div class="col-sm">
+                <strong>{{this.country}}</strong>
+            </div>
+            <div class="col-sm">
+                <a class="btn btn-outline-dark" href="./teams/{{this.name}}&{{this.country}}"><strong> > </strong></a>
+            </div>
+        </div>
     </li>
     {{/each}}
 </ul>
-

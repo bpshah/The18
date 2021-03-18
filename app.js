@@ -49,7 +49,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // handlebar helper for assignment of data
-handlebars.registerHelper("setVar", function(varName, varValue, options) {
+handlebars.registerHelper("setVar", function (varName, varValue, options) {
   options.data.root[varName] = varValue;
 });
 
@@ -94,6 +94,53 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+let data4;
+app.post("/index", async (req, res) => {
+  let table;
+  console.log(req.body.sea2);
+  console.log(req.body.sea);
+  switch (req.body.sea2) {
+    case "teams":
+      teams.find({ name: req.body.sea }, (err, data) => {
+        data4 = data;
+        console.log(data);
+      }).then(() => {
+        console.log("Now I am red!");
+        res.render("teamsfullview", {
+          data: data4
+        });
+      });
+      break;
+    case "leagues":
+      console.log("Leagues hit!");
+      let data2;
+      await leagues.find({ name: req.body.sea }, function (err, data) { // <== note the await keyword here
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(data + "This");
+          data2 = data;
+        }
+      }).limit(100);
+      res.render("league", {
+        data: data2
+      });
+      break;
+    case "players":
+      players.find({ "first name": req.body.sea }, (err, data) => {
+        data4 = data;
+        console.log(data);
+      }).then(() => {
+        console.log("Now I am red!");
+        res.render("teamsfullview", {
+          data: data4
+        });
+      });
+      break;
+    default:
+  }
+
+});
 // Signup page Route
 app.get("/signup", (req, res) => {
   res.render("user/signup");
@@ -113,18 +160,18 @@ var connection = mongoose.connection;
 
 // Login page Route
 // app.post("/teams", async (req, res) => {
-  // teams.find(function (err, data) {
-  // });
-  // teams.find(function (err, data) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     console.log("This is Data!" + data);
-  //     res.render("teams", {
-  //       data:data
-  //     });
-  //   }
-  // });
+// teams.find(function (err, data) {
+// });
+// teams.find(function (err, data) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("This is Data!" + data);
+//     res.render("teams", {
+//       data:data
+//     });
+//   }
+// });
 
 //   let data2;
 //   await teams.find({$text: {$search: req.body.sea}}, function (err, data) { // <== note the await keyword here
@@ -154,7 +201,7 @@ app.get("/leagues", async (req, res) => {
     }
   }).limit(100);
   res.render("league", {
-    data : data2
+    data: data2
   });
 
 });
@@ -171,16 +218,16 @@ app.post("/teams", async (req, res) => {
     }
   }).limit(10);
   res.render("league", {
-    data : data2
+    data: data2
   });
 
 });
 
-// Post teams
+// get teams
 app.get("/teams/:uid&:uc", async (req, res) => {
   console.log(req.params.uid);
   let data2;
-  await teams.find({ league : req.params.uid, country: req.params.uc}, function (err, data) { // <== note the await keyword here
+  await teams.find({ league: req.params.uid, country: req.params.uc }, function (err, data) { // <== note the await keyword here
     if (err) {
       console.log(err);
     } else {
@@ -189,15 +236,33 @@ app.get("/teams/:uid&:uc", async (req, res) => {
     }
   }).limit(10);
   res.render("teams", {
-    data : data2
+    data: data2
   });
-
 });
+
+
+// get teams
+app.get("/teams", async (req, res) => {
+  console.log(req.params.uid);
+  let data2;
+  await teams.find({}, function (err, data) { // <== note the await keyword here
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data + "This");
+      data2 = data;
+    }
+  }).limit(10);
+  res.render("teams", {
+    data: data2
+  });
+});
+
 
 app.get("/teams/teams/:name", async (req, res) => {
   console.log(req.params.name);
   let data2;
-  await players.find({ team : req.params.name}, function (err, data) { // <== note the await keyword here
+  await players.find({ team: req.params.name }, function (err, data) { // <== note the await keyword here
     if (err) {
       console.log(err);
     } else {
@@ -206,10 +271,49 @@ app.get("/teams/teams/:name", async (req, res) => {
     }
   });
   res.render("players", {
-    data : data2
+    data: data2
   });
 
 });
+
+
+// Just name of team
+let data2;
+app.get("/teamsview", async (req, res) => {
+  teams.find({}, (err, data) => {
+    data2 = data;
+    console.log(data);
+  }).then(() => {
+    console.log("Now I am red!");
+    res.render("teamsview", {
+      data: data2
+    });
+  });
+});
+
+
+let data3;
+app.get("/teamsfullview/:id&:name", async (req, res) => {
+  teams.find({ id: req.params.id, name: req.params.name }, (err, data) => {
+    data3 = data;
+    console.log(data);
+  }).limit(1).then(() => {
+    console.log("Now I am red!");
+    res.render("teamsfullview", {
+      data: data3
+    });
+  });
+});
+
+// // Just name of team
+// app.get("/teamsfullview/:id", async (req, res) => {
+//   console.log(req.params.id);
+//   // console.log("Id: " + Object.values(data2).find(e => e == req.params.id));
+//   res.render("teamsfullview", {
+//     data: data2
+//   });
+// });
+
 
 app.get("/players", async (req, res) => {
   //console.log(data + "This");
@@ -223,7 +327,7 @@ app.get("/players", async (req, res) => {
     }
   }).limit(10);
   res.render("league", {
-    data : data2
+    data: data2
   });
 
 });

@@ -2,11 +2,12 @@
     <div class="row search-root">
         <div class="card search">
             <div class="card-body search-two">
-                <form class="form-inline" method="post" action="/teams">
+                <form class="form-inline" method="post" action="/index">
                     <div>
                         <div class="dsearch">
                             <input class="form-control mr-sm-2 dsearch-input" type="search" placeholder="Search"
-                                aria-label="Search" name="sea">
+                                aria-label="Search" name="sea" />
+                            <input id="myText" style="display: none;" name="sea2" value=""/>
 
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -14,14 +15,14 @@
                                     Options
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" id="player" onclick="myFunction1()">Player</a>
-                                    <a class="dropdown-item" href="#" id="team" onclick="myFunction2()">Team</a>
-                                    <a class="dropdown-item" href="#" id="leagues" onclick="myFunction3()">Leagues</a>
+                                    <a class="dropdown-item" href="#" id="player" onclick="myFunction1()">player</a>
+                                    <a class="dropdown-item" href="#" id="team" onclick="myFunction2()">teams</a>
+                                    <a class="dropdown-item" href="#" id="leagues" onclick="myFunction3()">leagues</a>
                                 </div>
-                            </div>
-                            <div class="clear-float"></div>
-                            <button class="btn btn-outline-success my-2 my-sm-0 search-button"
+                                <button class="btn btn-outline-success my-2 my-sm-0 search-button"
                                 type="submit">Search</button>
+                            </div>
+                            <div class="clear-float"></div>                            
                         </div>
                     </div>
                 </form>
@@ -33,11 +34,14 @@
 <script>
     function myFunction1() {
         document.getElementById("dropdownMenuButton").innerHTML = document.getElementById("player").innerHTML;
+        document.getElementById("myText").value = document.getElementById("player").innerHTML;
     }
     function myFunction2() {
         document.getElementById("dropdownMenuButton").innerHTML = document.getElementById("team").innerHTML;
+        document.getElementById("myText").value = document.getElementById("team").innerHTML;
     }
     function myFunction3() {
         document.getElementById("dropdownMenuButton").innerHTML = document.getElementById("leagues").innerHTML;
+        document.getElementById("myText").value = document.getElementById("leagues").innerHTML;
     }
 </script>
