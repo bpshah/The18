@@ -106,3 +106,8 @@ body {
 .image-logo{
     width: 5%;
 }
+
+.playerstyle {
+    align-self: center;
+    color: slategrey;
+}

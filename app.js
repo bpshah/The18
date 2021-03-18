@@ -24,7 +24,7 @@ const User = mongoose.model("users");
 
 require("./config/passport")(passport);
 
-// Load Material Model
+// Load Team Model
 require("./models/teams");
 const teams = mongoose.model("teams");
 
@@ -32,6 +32,7 @@ const teams = mongoose.model("teams");
 require("./models/leagues");
 const leagues = mongoose.model("leagues");
 
+// Load player Model
 require("./models/players");
 const players = mongoose.model("players");
 
@@ -107,6 +108,10 @@ app.get("/login", (req, res) => {
 // Login page Route
 app.get("/about", (req, res) => {
   res.render("about");
+});
+
+app.get("/players", (req, res) => {
+  res.render("player");
 });
 
 app.get("/data/:uid", (req, res) => {
