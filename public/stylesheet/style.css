@@ -116,6 +116,11 @@ body {
     width: 5%;
 }
 
+.playerstyle {
+    align-self: center;
+    color: slategrey;
+}
+
 .list-div{
     width: 100%;
     align-self: center;
