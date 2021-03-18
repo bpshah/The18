@@ -47,10 +47,10 @@ var teams = new Schema({
         type: String,
         required: true
     },
-    "venue capcity": {
+    "venue capacity": {
         type: String,
         required: true
     }
 });
 
-mongoose.model('teams', teams);
+mongoose.model('teams', teams, "teams");
